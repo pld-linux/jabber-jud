@@ -1,0 +1,12 @@
+diff -durN jud-0.4.orig/Makefile jud-0.4/Makefile
+--- jud-0.4.orig/Makefile	Thu Feb  1 10:46:54 2001
++++ jud-0.4/Makefile	Sat Dec 22 11:53:32 2001
+@@ -1,6 +1,6 @@
+-include ../platform-settings
++include /usr/lib/jabber/platform-settings
+ 
+-CFLAGS:=$(CFLAGS) -I../jabberd
++CFLAGS:=$(CFLAGS) -I/usr/include/jabberd
+ 
+ jud_OBJECTS=jud.o jud_reg.o jud_search.o
+ 
