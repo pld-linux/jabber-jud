@@ -6,10 +6,10 @@
     
     ...
 
-    <service type="jud" jid="jud.localhost" name="Jabber User Directory">
+    <item category="service" type="jud" jid="jud.localhost" name="Jabber User Directory">
       <ns>jabber:iq:register</ns>
       <ns>jabber:iq:search</ns>
-    </service>
+    </item>
 
     ...
 
