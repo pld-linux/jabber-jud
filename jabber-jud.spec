@@ -8,10 +8,12 @@ Group:		Applications/Communications
 Source0:	http://download.jabber.org/dists/1.4/final/jud-%{version}.tar.gz
 # Source0-md5:	a057e8dd5966fa0d26ded03697ba395a
 Source1:	jud.xml
+Source2:	jabber-jud.init
+Source3:	jabber-jud.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
-BuildRequires:	jabber-devel
-%requires_eq	jabber
+BuildRequires:	jabberd14-devel
+%requires_eq	jabberd14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -30,34 +32,45 @@ u¿ytkownikach systemu Jabber.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd14 \
+	$RPM_BUILD_ROOT{%{_sbindir},/etc/{rc.d/init.d,sysconfig}}
 
-install jud.so $RPM_BUILD_ROOT%{_libdir}/jabberd
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd
+install jud.so $RPM_BUILD_ROOT%{_libdir}/jabberd14
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd14
+ln -s %{_sbindir}/jabberd14 $RPM_BUILD_ROOT%{_sbindir}/jabber-jud
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/jabber-jud
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-jud
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -r /var/lock/subsys/jabberd ]; then
-	if [ -r /var/lock/subsys/jabber-jud ]; then
-		/etc/rc.d/init.d/jabberd restart jud >&2
-	else
-		echo "Run \"/etc/rc.d/init.d/jabberd start jud\" to start JUD."
+if [ -f /etc/jabberd/secret ] ; then
+	SECRET=`cat /etc/jabberd/secret`
+	if [ -n "$SECRET" ] ; then
+        	echo "Updating component authentication secret in the config file..."
+		perl -pi -e "s/>secret</>$SECRET</" /etc/jabberd14/jud.xml
 	fi
+fi
+
+if [ -r /var/lock/subsys/jabber-jud ]; then
+	/etc/rc.d/init.d/jabber-jud restart >&2
 else
-	echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
+	echo "Run \"/etc/rc.d/init.d/jabber-jud start\" to start Jabber mu-conference service."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
 	if [ -r /var/lock/subsys/jabber-jud ]; then
-		/etc/rc.d/init.d/jabberd stop jud >&2
+		/etc/rc.d/init.d/jabber-jud stop >&2
 	fi
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) %{_libdir}/jabberd/*
-%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd/*
+%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_libdir}/jabberd14/*
+%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd14/*
+%attr(754,root,root) /etc/rc.d/init.d/jabber-jud
+%config(noreplace) %verify(not size mtime md5) /etc/sysconfig/jabber-jud
