@@ -14,18 +14,18 @@ BuildRequires:	jabber-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This is User Directory module for Jabber. 
+This is User Directory module for Jabber.
 
 %description -l pl
-Modu³ ten umo¿liwia rejestrowanie i przeszukiwanie danych o u¿ytkownikach
-systemu Jabber.
+Modu³ ten umo¿liwia rejestrowanie i przeszukiwanie danych o
+u¿ytkownikach systemu Jabber.
 
 %prep
 %setup -qn jud-%{version}
 %patch0 -p1
 
 %build
-%{__make} 
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -34,7 +34,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd
 install jud.so $RPM_BUILD_ROOT%{_libdir}/jabberd
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd
 
-gzip -9nf README 
+gzip -9nf README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
