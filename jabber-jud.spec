@@ -7,7 +7,7 @@ License:	distributable
 Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
-Source0:	http://download.jabber.org/distd/1.4/final/jud-%{version}.tar.gz
+Source0:	http://download.jabber.org/dists/1.4/final/jud-%{version}.tar.gz
 Source1:	jud.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
