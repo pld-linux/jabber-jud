@@ -11,7 +11,7 @@ Source1:	jud.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabber-devel
-%requires_eq  	jabber
+%requires_eq	jabber
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,12 +41,12 @@ rm -rf $RPM_BUILD_ROOT
 %post
 if [ -r /var/lock/subsys/jabberd ]; then
 	if [ -r /var/lock/subsys/jabber-jud ]; then
-        	/etc/rc.d/init.d/jabberd restart jud >&2
+		/etc/rc.d/init.d/jabberd restart jud >&2
 	else
-        	echo "Run \"/etc/rc.d/init.d/jabberd start jud\" to start JUD."
+		echo "Run \"/etc/rc.d/init.d/jabberd start jud\" to start JUD."
 	fi
 else
-        echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
+	echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
 fi
 
 %preun
