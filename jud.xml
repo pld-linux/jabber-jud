@@ -1,38 +1,12 @@
 <jabber>
-  <!-- For this to work, you should also update /etc/jabber/jabber.xml
-       Add the folowing (changed to your needs):
-
-  <browse>
-    
-    ...
-
-    <item category="service" type="jud" jid="jud.localhost" name="Jabber User Directory">
-      <ns>jabber:iq:register</ns>
-      <ns>jabber:iq:search</ns>
-    </item>
-
-    ...
-
-  </browse>
-
-
-  <service id="judlinker">
-    <host>jud.localhost</host>
-    <accept>
-      <ip>127.0.0.1</ip>
-      <port>1235</port>
-      <secret>test</secret>
-    </accept>
-  </service>
-  -->
 
   <!-- This connects the JUD process to the master process -->
-  <service id="judlinker">
+  <service id="jud-linker">
     <uplink/>
     <connect>
       <ip>127.0.0.1</ip>
-      <port>1235</port>
-      <secret>test</secret>
+      <port>5347</port>
+      <secret>secret</secret>
     </connect>
   </service>
 
@@ -48,11 +22,37 @@
     </jud>
 
     <load>
-      <jud>/usr/lib/jabberd/jud.so</jud>
+      <jud>/usr/lib/jabberd14/jud.so</jud>
     </load>
   </service>
 
-  <pidfile>/var/lib/jabber/jud.pid</pidfile>
+  <log id='rlogger'>
+    <host/>
+    <logtype/>
+    <format>%d: [%t] (%h): %s</format>
+    <file>/var/log/jabberd14/jud-record.log</file>
+    <stderr/>
+  </log>
+
+  <log id='elogger'>
+    <host/>
+    <logtype/>
+    <format>%d: [%t] (%h): %s</format>
+    <file>/var/log/jabberd14/jud-error.log</file>
+    <stderr/>
+  </log>
+
+  <xdb id="xdb">
+    <host/>
+    <load>
+      <xdb_file>/usr/lib/jabberd14/xdb_file.so</xdb_file>
+    </load>
+    <xdb_file xmlns="jabber:config:xdb_file">
+      <spool>/var/lib/jabberd14/spool</spool>
+    </xdb_file>
+  </xdb>
+
+  <pidfile>/var/lib/jabberd14/jud.pid</pidfile>
 
 </jabber>
 
