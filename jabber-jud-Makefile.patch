@@ -3,7 +3,7 @@ diff -durN jud-0.4.orig/Makefile jud-0.4/Makefile
 +++ jud-0.4/Makefile	Sat Dec 22 11:53:32 2001
 @@ -1,6 +1,6 @@
 -include ../platform-settings
-+include /usr/lib/jabber/platform-settings
++include /usr/lib/jabberd/platform-settings
  
 -CFLAGS:=$(CFLAGS) -I../jabberd
 +CFLAGS:=$(CFLAGS) -I/usr/include/jabberd
