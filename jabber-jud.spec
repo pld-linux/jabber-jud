@@ -12,7 +12,7 @@ Source1:	jud.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabber-devel
-Requires:	jabber
+%requires_eq  	jabber
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
