@@ -13,6 +13,7 @@ Source3:	jabber-jud.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabberd14-devel
+BuildRequires:	pth-devel
 %requires_eq	jabberd14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
