@@ -6,6 +6,7 @@ Release:	1
 License:	distributable
 Group:		Applications/Communications
 Source0:	http://download.jabber.org/dists/1.4/final/jud-%{version}.tar.gz
+# Source0-md5:	a057e8dd5966fa0d26ded03697ba395a
 Source1:	jud.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
