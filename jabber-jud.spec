@@ -8,8 +8,11 @@ Group:		Applications/Communications
 Group(de):	Applikationen/Kommunikation
 Group(pl):	Aplikacje/Komunikacja
 Source0:	http://download.jabber.org/distd/1.4/final/jud-%{version}.tar.gz
+Source1:	jud.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
+BuildRequires:	jabber-devel
+Requires:	jabber
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,15 +32,36 @@ systemu Jabber.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_libdir}/jabber
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabber
 install jud.so $RPM_BUILD_ROOT%{_libdir}/jabber
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabber
 
 gzip -9nf README 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+if [ -r /var/lock/subsys/jabberd ]; then
+	if [ -r /var/lock/subsys/jabber-jud ]; then
+        	/etc/rc.d/init.d/jabberd restart jud >&2
+	else
+        	echo "Run \"/etc/rc.d/init.d/jabberd start jud\" to start JUD."
+	fi
+else
+        echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+	if [ -r /var/lock/subsys/jabber-jud ]; then
+		/etc/rc.d/init.d/jabberd stop jud >&2
+	fi
+fi
+
+
 %files
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_libdir}/jabber/*
+%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabber/*
