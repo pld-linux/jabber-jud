@@ -28,7 +28,8 @@ u¿ytkownikach systemu Jabber.
 %patch0 -p1
 
 %build
-%{__make}
+%{__make} \
+	libdir=%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
