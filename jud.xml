@@ -1,0 +1,58 @@
+<jabber>
+  <!-- For this to work, you should also update /etc/jabber/jabber.xml
+       Add the folowing (changed to your needs):
+
+  <browse>
+    
+    ...
+
+    <service type="jud" jid="jud.localhost" name="Jabber User Directory">
+      <ns>jabber:iq:register</ns>
+      <ns>jabber:iq:search</ns>
+    </service>
+
+    ...
+
+  </browse>
+
+
+  <service id="judlinker">
+    <host>jud.localhost</host>
+    <accept>
+      <ip>127.0.0.1</ip>
+      <port>1235</port>
+      <secret>test</secret>
+    </accept>
+  </service>
+  -->
+
+  <!-- This connects the JUD process to the master process -->
+  <service id="judlinker">
+    <uplink/>
+    <connect>
+      <ip>127.0.0.1</ip>
+      <port>1235</port>
+      <secret>test</secret>
+    </connect>
+  </service>
+
+  <service id="jud.localhost">
+    <host>jud.localhost</host>
+    
+    <jud xmlns="jabber:config:jud">
+      <vCard>
+        <FN>Local User Directory</FN>
+        <DESC>This service provides a simple user directory service.</DESC>
+        <URL>http://foo.bar/</URL>
+      </vCard>
+    </jud>
+
+    <load>
+      <jud>/usr/lib/jabber/jud.so</jud>
+    </load>
+  </service>
+
+  <pidfile>/var/lib/jabber/jud.pid</pidfile>
+
+</jabber>
+
