@@ -52,7 +52,7 @@
     </xdb_file>
   </xdb>
 
-  <pidfile>/var/lib/jabberd14/jud.pid</pidfile>
+  <pidfile>/var/run/jabber/jud.pid</pidfile>
 
 </jabber>
 

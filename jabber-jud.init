@@ -15,7 +15,7 @@
 . /etc/sysconfig/network
 
 # Get service config - may override defaults
-[ -f /etc/sysconfig/jabber-jud ] && . /etc/sysconfig/jabber-muc
+[ -f /etc/sysconfig/jabber-jud ] && . /etc/sysconfig/jabber-jud
 
 # Check that networking is up.
 if is_yes "${NETWORKING}"; then
@@ -32,7 +32,7 @@ case "$1" in
   start)
 	if [ ! -f /var/lock/subsys/jabber-jud ]; then
 		msg_starting "Jabber user directory"
-		daemon jabber-jud -c /etc/jabberd14/jud.xml -B -U jabber -G jabber
+		daemon jabber-jud -c /etc/jabber/jud.xml -B -U jabber -G jabber
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/jabber-jud
 	else

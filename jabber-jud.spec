@@ -32,11 +32,11 @@ u¿ytkownikach systemu Jabber.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd14 \
+install -d $RPM_BUILD_ROOT{%{_libdir}/jabberd14,%{_sysconfdir}/jabber} \
 	$RPM_BUILD_ROOT{%{_sbindir},/etc/{rc.d/init.d,sysconfig}}
 
 install jud.so $RPM_BUILD_ROOT%{_libdir}/jabberd14
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd14
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabber
 ln -s %{_sbindir}/jabberd14 $RPM_BUILD_ROOT%{_sbindir}/jabber-jud
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/jabber-jud
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-jud
@@ -45,11 +45,11 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-jud
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /etc/jabberd/secret ] ; then
-	SECRET=`cat /etc/jabberd/secret`
+if [ -f /etc/jabber/secret ] ; then
+	SECRET=`cat /etc/jabber/secret`
 	if [ -n "$SECRET" ] ; then
         	echo "Updating component authentication secret in the config file..."
-		perl -pi -e "s/>secret</>$SECRET</" /etc/jabberd14/jud.xml
+		perl -pi -e "s/>secret</>$SECRET</" /etc/jabber/jud.xml
 	fi
 fi
 
@@ -71,6 +71,6 @@ fi
 %doc README
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/jabberd14/*
-%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd14/*
+%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabber/*
 %attr(754,root,root) /etc/rc.d/init.d/jabber-jud
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/jabber-jud
