@@ -48,7 +48,7 @@
     </jud>
 
     <load>
-      <jud>/usr/lib/jabber/jud.so</jud>
+      <jud>/usr/lib/jabberd/jud.so</jud>
     </load>
   </service>
 
