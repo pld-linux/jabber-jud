@@ -29,12 +29,10 @@ u¿ytkownikach systemu Jabber.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd
+
 install jud.so $RPM_BUILD_ROOT%{_libdir}/jabberd
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd
-
-gzip -9nf README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,9 +55,8 @@ if [ "$1" = "0" ]; then
 	fi
 fi
 
-
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README
 %attr(755,root,root) %{_libdir}/jabberd/*
 %attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd/*
