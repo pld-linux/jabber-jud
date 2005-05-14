@@ -8,8 +8,8 @@ Group:		Applications/Communications
 Source0:	http://download.jabber.org/dists/1.4/final/jud-%{version}.tar.gz
 # Source0-md5:	a057e8dd5966fa0d26ded03697ba395a
 Source1:	jud.xml
-Source2:	jabber-jud.init
-Source3:	jabber-jud.sysconfig
+Source2:	%{name}.init
+Source3:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabberd14-devel
