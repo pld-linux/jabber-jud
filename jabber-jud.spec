@@ -12,7 +12,9 @@ Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
+BuildRequires:	expat-devel
 BuildRequires:	jabberd14-devel
+BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pth-devel
 %requires_eq	jabberd14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,6 +75,6 @@ fi
 %doc README
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/jabberd14/*
-%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabber/*
+%attr(640,root,jabber) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/jabber/*
 %attr(754,root,root) /etc/rc.d/init.d/jabber-jud
-%config(noreplace) %verify(not size mtime md5) /etc/sysconfig/jabber-jud
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/jabber-jud
