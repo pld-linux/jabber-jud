@@ -12,10 +12,7 @@ Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
-BuildRequires:	expat-devel
 BuildRequires:	jabberd14-devel
-BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	pth-devel
 %requires_eq	jabberd14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
