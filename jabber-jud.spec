@@ -14,6 +14,7 @@ Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabberd14-devel
 %requires_eq	jabberd14
+Requires(post):	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,11 +47,11 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-jud
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /etc/jabber/secret ] ; then
-	SECRET=`cat /etc/jabber/secret`
+if [ -f %{_sysconfdir}/jabber/secret ] ; then
+	SECRET=`cat %{_sysconfdir}/jabber/secret`
 	if [ -n "$SECRET" ] ; then
-        	echo "Updating component authentication secret in the config file..."
-		perl -pi -e "s/>secret</>$SECRET</" /etc/jabber/jud.xml
+		echo "Updating component authentication secret in the config file..."
+		%{__sed} -i -e "s/>secret</>$SECRET</" /etc/jabber/jud.xml
 	fi
 fi
 
