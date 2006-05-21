@@ -2,7 +2,7 @@ Summary:	Jabber User Directory module
 Summary(pl):	Modu³ rejestru u¿ytkowników dla systemu Jabber
 Name:		jabber-jud
 Version:	0.4
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Communications
 Source0:	http://download.jabber.org/dists/1.4/final/jud-%{version}.tar.gz
