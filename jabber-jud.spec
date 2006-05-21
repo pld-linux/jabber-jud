@@ -12,7 +12,7 @@ Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
-BuildRequires:	jabberd14-devel
+BuildRequires:	jabberd14-devel >= 1.4.3.1-2
 %requires_eq	jabberd14
 Requires(post):	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
