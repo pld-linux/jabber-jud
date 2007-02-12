@@ -1,5 +1,5 @@
 Summary:	Jabber User Directory module
-Summary(pl):	Modu≥ rejestru uøytkownikÛw dla systemu Jabber
+Summary(pl.UTF-8):   Modu≈Ç rejestru u≈ºytkownik√≥w dla systemu Jabber
 Name:		jabber-jud
 Version:	0.4
 Release:	3
@@ -20,9 +20,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This is User Directory module for Jabber.
 
-%description -l pl
-Modu≥ ten umoøliwia rejestrowanie i przeszukiwanie danych o
-uøytkownikach systemu Jabber.
+%description -l pl.UTF-8
+Modu≈Ç ten umo≈ºliwia rejestrowanie i przeszukiwanie danych o
+u≈ºytkownikach systemu Jabber.
 
 %prep
 %setup -qn jud-%{version}
