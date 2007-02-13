@@ -1,5 +1,5 @@
 Summary:	Jabber User Directory module
-Summary(pl.UTF-8):   Moduł rejestru użytkowników dla systemu Jabber
+Summary(pl.UTF-8):	Moduł rejestru użytkowników dla systemu Jabber
 Name:		jabber-jud
 Version:	0.4
 Release:	3
